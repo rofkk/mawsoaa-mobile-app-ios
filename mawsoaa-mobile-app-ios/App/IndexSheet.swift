@@ -8,6 +8,7 @@ struct IndexSheet: View {
     @State private var model = IndexModel()
     @State private var expanded: Set<Int> = []
     @State private var history = ReadingHistory.shared
+    @State private var showPrivacy = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -30,6 +31,7 @@ struct IndexSheet: View {
         .background(Brand.parchment.ignoresSafeArea())
         .environment(\.colorScheme, .light)
         .task { await model.load() }
+        .sheet(isPresented: $showPrivacy) { PrivacyPolicyView() }
     }
 
     // Oxblood band: Academy logo (right) and the encyclopedia's gold logo, close button on the left.
@@ -68,7 +70,18 @@ struct IndexSheet: View {
         VStack(spacing: 0) {
             linkRow("الإحصائيات", path: "/statistics")
             linkRow("عن الموسوعة", path: "/about")
-            linkRow("سياسة الخصوصية", path: "/privacy-policy")
+            Button { showPrivacy = true } label: {
+                HStack {
+                    Text("سياسة الخصوصية")
+                        .font(.custom("ScheherazadeNew-Bold", size: 22, relativeTo: .title3))
+                        .foregroundStyle(Brand.ink)
+                    Spacer()
+                    Image(systemName: "chevron.left").font(.footnote.weight(.semibold)).foregroundStyle(Brand.gold)
+                }
+                .padding(.horizontal, 20).frame(minHeight: 54)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
         }
         .padding(.top, 8)
     }

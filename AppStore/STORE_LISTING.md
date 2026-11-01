@@ -121,12 +121,18 @@ Age rating: **4+** (questionnaire: answer "None" to everything; the app has unre
 
 ## 8. Privacy policy link
 
-```
-https://4nov.sharjah-encyclopedia.org/privacy-policy
-```
-(Live, HTTP 200. Includes contact details and a data-deletion procedure.)
+Use the **app's own** privacy policy (not the website's platform policy, which covers accounts and data deletion that don't exist in the app).
 
-⚠️ Before the domain changes from `4nov.` to the final domain, update this link in App Store Connect too. A dead privacy link is grounds for rejection.
+- Text: `privacy-policy/app-privacy.html` (Arabic + English, self-contained). The same text is inside the app: الفهرس › سياسة الخصوصية.
+- Host it on the encyclopedia site by copying the file into the website repo's `public/` folder, which serves it at:
+
+```
+https://sharjah-encyclopedia.org/app-privacy.html
+```
+
+(or `https://4nov.sharjah-encyclopedia.org/app-privacy.html` until the final domain is live). Paste that URL into App Store Connect › App Information › Privacy Policy URL.
+
+⚠️ The URL must be live before you submit. Apple checks it.
 
 ## 9. Support URL (contact us)
 

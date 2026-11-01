@@ -39,6 +39,7 @@ enum AppTab: CaseIterable, Hashable {
 struct WebShellView: View {
     @State private var web = WebController()
     @State private var showIndex = false
+    @State private var showPrivacy = false
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -70,6 +71,7 @@ struct WebShellView: View {
         .sheet(item: $web.externalURL) { url in
             SafariView(url: url).ignoresSafeArea()
         }
+        .sheet(isPresented: $showPrivacy) { PrivacyPolicyView() }
         .sheet(isPresented: $showIndex) {
             IndexSheet { web.open(path: $0) }
                 .presentationDragIndicator(.visible)
@@ -78,6 +80,9 @@ struct WebShellView: View {
         .animation(.easeInOut(duration: 0.2), value: web.isLoading)
         #if DEBUG
         .task {   // testing: `-index YES` opens الفهرس after launch
+            if UserDefaults.standard.bool(forKey: "privacy") {
+                try? await Task.sleep(for: .seconds(3)); showPrivacy = true
+            }
             if UserDefaults.standard.bool(forKey: "index") {
                 try? await Task.sleep(for: .seconds(4)); showIndex = true
             }
