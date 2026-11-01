@@ -1,0 +1,60 @@
+IMPORTANT: Network Permissions Required
+==========================================
+
+The app is stuck loading because iOS blocks network requests by default.
+
+SOLUTION - Add these settings in Xcode:
+
+1. Open your project in Xcode
+2. Select the project in the navigator (blue icon at top)
+3. Select the "mawsoaa-mobile-app-ios" target
+4. Go to the "Info" tab
+5. Click the "+" button to add a new key
+6. Add this key:
+
+   Key: App Transport Security Settings (NSAppTransportSecurity)
+   Type: Dictionary
+   
+   Then expand it and add:
+   
+   Key: Allow Arbitrary Loads (NSAllowsArbitraryLoads)
+   Type: Boolean
+   Value: YES
+
+OR for more security (recommended):
+
+   Key: App Transport Security Settings (NSAppTransportSecurity)
+   Type: Dictionary
+   
+   Then expand it and add:
+   
+   Key: Exception Domains (NSExceptionDomains)
+   Type: Dictionary
+   
+   Then expand it and add:
+   
+   Key: sharjah-encyclopedia.org
+   Type: Dictionary
+   
+   Then expand it and add:
+   
+   Key: NSIncludesSubdomains
+   Type: Boolean
+   Value: YES
+   
+   Key: NSExceptionAllowsInsecureHTTPLoads
+   Type: Boolean
+   Value: NO
+
+7. Save and rebuild (Cmd + R)
+
+ALTERNATIVE - If you see an Info.plist file:
+Add this XML inside the <dict> tag:
+
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
+
+This will allow all network connections. For production, use the more specific domain exception shown above.
