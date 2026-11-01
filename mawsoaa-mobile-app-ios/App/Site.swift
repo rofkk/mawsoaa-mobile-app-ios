@@ -63,6 +63,39 @@ enum Site {
       }
       add();
       document.addEventListener('DOMContentLoaded', add);
+
+      // Native iOS share sheet for the site's «مشاركة البطاقة» (it calls navigator.share when present).
+      try {
+        var nativeShare = function (d) {
+          d = d || {};
+          window.webkit.messageHandlers.share.postMessage({ title: d.title || document.title || '', text: d.text || '', url: d.url || location.href });
+          return Promise.resolve();
+        };
+        Object.defineProperty(navigator, 'share', { value: nativeShare, configurable: true });
+        Object.defineProperty(navigator, 'canShare', { value: function () { return true; }, configurable: true });
+      } catch (e) {}
+
+      // «آخر ما قرأت»: report each entry page opened (term / biography), with its title, to the app.
+      var lastSent = '';
+      function reportVisit() {
+        var path = location.pathname;
+        if (!(path.indexOf('/term/') === 0 || path.indexOf('/biography/') === 0) || path === lastSent) return;
+        var tries = 0;
+        (function wait() {
+          var h = document.querySelector('h1.hero-title, .term-page h1, main h1');
+          var title = h && h.innerText.trim();
+          if (title) {
+            lastSent = path;
+            try { window.webkit.messageHandlers.visit.postMessage({ path: path, title: title }); } catch (e) {}
+          } else if (tries++ < 20) { setTimeout(wait, 300); }
+        })();
+      }
+      ['pushState', 'replaceState'].forEach(function (m) {
+        var orig = history[m];
+        history[m] = function () { var r = orig.apply(this, arguments); setTimeout(reportVisit, 50); return r; };
+      });
+      window.addEventListener('popstate', function () { setTimeout(reportVisit, 50); });
+      window.addEventListener('load', reportVisit);
       // Hide save buttons that some pages render only for signed-in readers, should one appear.
       new MutationObserver(function () {
         add();

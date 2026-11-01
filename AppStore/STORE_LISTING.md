@@ -54,7 +54,9 @@ App Store "Promotional text" (up to 170 characters, can be changed anytime witho
 > • تصفية نتائج البحث بحسب العلم، والبحث داخل علم بعينه، والتصفح بحسب الحروف الهجائية.
 > • التعريف بكل علم: نشأته وموضوعه ومصادره.
 > • إحصائيات محدّثة لما نُشر من مصطلحات في كل قسم ومجال وعلم.
-> • مشاركة البطاقات العلمية مع الآخرين بسهولة.
+> • مشاركة البطاقات العلمية مع الآخرين بسهولة عبر قائمة المشاركة في iOS.
+> • «آخر ما قرأت»: الرجوع بسرعة إلى آخر المصطلحات التي قرأتها، محفوظة على جهازك فقط.
+> • فهرس شامل للأقسام والمجالات والعلوم في متناول يدك.
 > • واجهة عربية بالكامل، مصمّمة بروح المخطوط العربي.
 >
 > **لمن هذا التطبيق؟**
@@ -82,7 +84,9 @@ App Store "Promotional text" (up to 170 characters, can be changed anytime witho
 > • Filter results by discipline, search within a single discipline, or browse alphabetically.
 > • Read an introduction to each discipline: its origins, subject and sources.
 > • See up-to-date statistics of the terms published in every section, field and discipline.
-> • Share any entry with others.
+> • Share any entry through the iOS share sheet.
+> • "Recently read": jump back to the entries you opened last, kept on your device only.
+> • A complete index of sections, fields and disciplines, always one tap away.
 > • A fully Arabic interface inspired by the Arabic manuscript tradition.
 >
 > **Who is it for?**
@@ -162,7 +166,7 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 
 > This is the official app of the Comprehensive Arabic Encyclopedia (الموسوعة العربية الشاملة), a project of the Arabic Language Academy in Sharjah (UAE), a government cultural institution.
 >
-> The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with statistics.
+> The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with a "recently read" list (stored on device only), statistics and the privacy policy. Entries can be shared through the native iOS share sheet.
 >
 > External links (the Academy website, other sites) open in an in-app Safari view. The app works in Arabic, right-to-left.
 
@@ -174,6 +178,6 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 2. Discipline page: علوم القرآن with alphabetical filter
 3. Term entry: الأمثال القرآنية الظاهرة
 4. Search results: البلاغة
-5. الفهرس: the index of sections, fields and sciences
+5. الفهرس: recently read, privacy policy, and the index of sections, fields and sciences
 
 Google Play needs 2–8 phone screenshots; these can be reused (Play accepts this ratio).

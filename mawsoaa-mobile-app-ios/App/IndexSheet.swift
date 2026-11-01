@@ -7,12 +7,14 @@ struct IndexSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var model = IndexModel()
     @State private var expanded: Set<Int> = []
+    @State private var history = ReadingHistory.shared
 
     var body: some View {
         VStack(spacing: 0) {
             header
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    recentlyRead
                     quickLinks
                     Rectangle().fill(Brand.line).frame(height: 1).padding(.vertical, 8)
                     Text("فهرس الموسوعة")
@@ -66,8 +68,56 @@ struct IndexSheet: View {
         VStack(spacing: 0) {
             linkRow("الإحصائيات", path: "/statistics")
             linkRow("عن الموسوعة", path: "/about")
+            linkRow("سياسة الخصوصية", path: "/privacy-policy")
         }
         .padding(.top, 8)
+    }
+
+    /// «آخر ما قرأت»: the last entries opened, stored on this phone only.
+    @ViewBuilder private var recentlyRead: some View {
+        let items = Array(history.items.prefix(5))
+        if !items.isEmpty {
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text("آخر ما قرأت")
+                        .font(.custom("ScheherazadeNew-Bold", size: 20, relativeTo: .headline))
+                        .foregroundStyle(Brand.sepia)
+                    Spacer()
+                    Button("مسح") { withAnimation { history.clear() } }
+                        .font(.custom("ScheherazadeNew-Regular", size: 16, relativeTo: .footnote))
+                        .foregroundStyle(Brand.muted)
+                        .accessibilityLabel("مسح سجلّ القراءة")
+                }
+                .padding(.horizontal, 20).padding(.top, 14).padding(.bottom, 6)
+
+                VStack(spacing: 0) {
+                    ForEach(items) { item in
+                        Button { go(item.path) } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: "clock.arrow.circlepath")
+                                    .font(.footnote).foregroundStyle(Brand.gold)
+                                Text(item.title)
+                                    .font(.custom("ScheherazadeNew-Regular", size: 20, relativeTo: .body))
+                                    .foregroundStyle(Brand.ink)
+                                    .lineLimit(1)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 18).frame(minHeight: 46)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        if item.id != items.last?.id {
+                            Rectangle().fill(Brand.line).frame(height: 1).padding(.horizontal, 18)
+                        }
+                    }
+                }
+                .background(RoundedRectangle(cornerRadius: 12).fill(Brand.vellum))
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Brand.line, lineWidth: 1))
+                .padding(.horizontal, 16)
+
+                Rectangle().fill(Brand.line).frame(height: 1).padding(.top, 16)
+            }
+        }
     }
 
     private func linkRow(_ title: String, path: String) -> some View {

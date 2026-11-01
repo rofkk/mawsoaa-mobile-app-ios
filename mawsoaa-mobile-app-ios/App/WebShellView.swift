@@ -107,6 +107,9 @@ final class WebController: NSObject {
         config.defaultWebpagePreferences.allowsContentJavaScript = true
         config.userContentController.addUserScript(
             WKUserScript(source: Site.injectedJS, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+        let bridge = ScriptBridge(self)
+        config.userContentController.add(bridge, name: "share")
+        config.userContentController.add(bridge, name: "visit")
 
         let web = WKWebView(frame: .zero, configuration: config)
         web.navigationDelegate = self
@@ -175,6 +178,34 @@ final class WebController: NSObject {
     @objc private func pullToRefresh(_ sender: UIRefreshControl) {
         retry()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { sender.endRefreshing() }
+    }
+
+    /// Messages from the page: native share sheet, and entries read (for «آخر ما قرأت»).
+    fileprivate func handle(_ message: WKScriptMessage) {
+        guard let body = message.body as? [String: Any] else { return }
+        switch message.name {
+        case "share":
+            let urlString = body["url"] as? String ?? webView.url?.absoluteString ?? Site.home.absoluteString
+            let title = (body["title"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            var items: [Any] = []
+            if !title.isEmpty { items.append(title) }
+            items.append(URL(string: urlString) ?? Site.home)
+            presentShareSheet(items)
+        case "visit":
+            if let path = body["path"] as? String, let title = body["title"] as? String {
+                ReadingHistory.shared.record(path: path, title: title)
+            }
+        default: break
+        }
+    }
+
+    private func presentShareSheet(_ items: [Any]) {
+        guard let root = UIApplication.shared.connectedScenes.compactMap({ ($0 as? UIWindowScene)?.keyWindow }).first?.rootViewController else { return }
+        var top = root
+        while let p = top.presentedViewController { top = p }
+        let sheet = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        sheet.popoverPresentationController?.sourceView = top.view
+        top.present(sheet, animated: true)
     }
 
     fileprivate func show(_ error: Error) {
@@ -286,6 +317,15 @@ extension WebController: WKUIDelegate {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         for (title, style, handler) in actions { alert.addAction(UIAlertAction(title: title, style: style) { _ in handler() }) }
         top.present(alert, animated: true)
+    }
+}
+
+/// Weak bridge so the web view's script handlers don't keep the controller alive.
+final class ScriptBridge: NSObject, WKScriptMessageHandler {
+    private weak var controller: WebController?
+    init(_ controller: WebController) { self.controller = controller }
+    func userContentController(_ ucc: WKUserContentController, didReceive message: WKScriptMessage) {
+        controller?.handle(message)
     }
 }
 
