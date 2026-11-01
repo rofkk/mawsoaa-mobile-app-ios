@@ -25,6 +25,7 @@ enum Site {
     /// link to account / saved / login pages.
     static let injectedCSS = """
     .bottom-bar { display: none !important; }
+    .result-newtab { display: none !important; }
     a[href="/saved"], a[href^="/saved/"], a[href^="/saved?"],
     a[href="/account"], a[href^="/account/"], a[href^="/account?"],
     a[href="/login"], a[href^="/login?"], a[href^="/auth/"] { display: none !important; }
