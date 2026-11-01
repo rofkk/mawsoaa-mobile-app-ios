@@ -359,15 +359,14 @@ extension URL: @retroactive Identifiable {
 /// Shown until the first page has loaded.
 struct SplashView: View {
     var body: some View {
+        // Same as the system launch screen (Config/Info.plist: LaunchBackground + LaunchLogo), so it continues seamlessly.
         ZStack {
-            Brand.band.ignoresSafeArea()
-            VStack(spacing: 28) {
-                Brand.leaf
-                    .mask(Image("LogoFull").resizable().scaledToFit())
-                    .aspectRatio(668.19 / 235.2, contentMode: .fit)
-                    .padding(.horizontal, 40)
-                ProgressView().tint(Brand.goldLight)
-            }
+            Brand.ox.ignoresSafeArea()
+            Image("LaunchLogo")
+                .resizable().scaledToFit()
+                .frame(width: 340)
+            ProgressView().tint(Brand.goldLight)
+                .offset(y: 120)
         }
         .accessibilityLabel("جارٍ تحميل الموسوعة")
     }
