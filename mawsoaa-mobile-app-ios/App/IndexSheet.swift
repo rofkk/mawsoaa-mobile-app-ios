@@ -34,21 +34,15 @@ struct IndexSheet: View {
         .sheet(isPresented: $showPrivacy) { PrivacyPolicyView() }
     }
 
-    // Oxblood band: Academy logo (right) and the encyclopedia's gold logo, close button on the left.
+    // Oxblood band: the title «الفهرس» (right), close button on the left. The logos are already in the page header.
     private var header: some View {
         ZStack {
             Brand.band
             HStack(alignment: .center, spacing: 14) {
-                Brand.goldLight
-                    .mask(Image("AcademyLogoMask").resizable().scaledToFit())
-                    .aspectRatio(410 / 128, contentMode: .fit)
-                    .frame(height: 50)
-                    .accessibilityLabel("مجمع اللغة العربية في الشارقة")
-                Brand.leaf
-                    .mask(Image("LogoFull").resizable().scaledToFit())
-                    .aspectRatio(668.19 / 235.2, contentMode: .fit)
-                    .frame(height: 46)
-                    .accessibilityLabel("الموسوعة العربية الشاملة")
+                Text("الفهرس")
+                    .font(.custom("ScheherazadeNew-Bold", size: 26, relativeTo: .title2))
+                    .foregroundStyle(Brand.goldLight)
+                    .accessibilityAddTraits(.isHeader)
                 Spacer(minLength: 8)
                 Button { dismiss() } label: {
                     Text("إغلاق")
