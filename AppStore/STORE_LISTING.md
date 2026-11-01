@@ -127,10 +127,10 @@ Use the **app's own** privacy policy (not the website's platform policy, which c
 - Host it on the encyclopedia site by copying the file into the website repo's `public/` folder, which serves it at:
 
 ```
-https://sharjah-encyclopedia.org/app-privacy.html
+https://4nov.sharjah-encyclopedia.org/app-privacy.html
 ```
 
-(or `https://4nov.sharjah-encyclopedia.org/app-privacy.html` until the final domain is live). Paste that URL into App Store Connect › App Information › Privacy Policy URL.
+(the app uses the `4nov.` domain, so the policy lives there too). Paste that URL into App Store Connect › App Information › Privacy Policy URL.
 
 ⚠️ The URL must be live before you submit. Apple checks it.
 
