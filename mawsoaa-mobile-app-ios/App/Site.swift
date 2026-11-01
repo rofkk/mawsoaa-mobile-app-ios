@@ -8,6 +8,12 @@ enum Site {
     /// Sections of the site that are not part of the app (no accounts, no saved items).
     static let blockedPrefixes = ["/saved", "/account", "/login", "/auth"]
 
+    /// Sites the app never opens (the Academy's website).
+    static func isIgnored(_ url: URL) -> Bool {
+        guard let host = url.host?.lowercased() else { return false }
+        return host == "alashj.ae" || host.hasSuffix(".alashj.ae")
+    }
+
     static func isInternal(_ url: URL) -> Bool {
         guard let host = url.host?.lowercased() else { return false }
         return hosts.contains(host)
@@ -33,6 +39,9 @@ enum Site {
     .site-academy { display: flex !important; align-items: center; flex-shrink: 0; min-height: 44px; }
     .site-academy-logo { height: 38px !important; width: auto !important; display: block !important; }
     .site-brand-logo { object-position: left center !important; }
+    /* the Academy logo is shown, not linked: no link to alashj.ae in the app */
+    a[href*="alashj.ae"] { pointer-events: none !important; cursor: default !important; }
+    a[href*="alashj.ae"].prose-link { pointer-events: none !important; color: inherit !important; text-decoration: none !important; }
     /* search page: only the title «البحث في الموسوعة»; the hint under the field centred */
     .search-page .ui-hero-kicker, .search-page .ui-hero-lead { display: none !important; }
     .search-hint { text-align: center !important; width: 100% !important; margin-inline: auto !important; align-self: center !important; }

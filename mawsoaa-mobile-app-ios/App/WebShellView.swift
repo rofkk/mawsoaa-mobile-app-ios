@@ -198,6 +198,9 @@ extension WebController: WKNavigationDelegate {
                  decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void) {
         guard let url = action.request.url else { return decisionHandler(.allow) }
 
+        // Links to the Academy's website do nothing in the app.
+        if Site.isIgnored(url) { return decisionHandler(.cancel) }
+
         // Account / saved / login are not part of the app.
         if Site.isBlocked(url) {
             decisionHandler(.cancel)
@@ -257,7 +260,7 @@ extension WebController: WKUIDelegate {
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for action: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let url = action.request.url {
-            if Site.isBlocked(url) { return nil }
+            if Site.isBlocked(url) || Site.isIgnored(url) { return nil }
             if Site.isInternal(url) { webView.load(action.request) } else { externalURL = url }
         }
         return nil
