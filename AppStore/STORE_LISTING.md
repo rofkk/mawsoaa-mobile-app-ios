@@ -33,8 +33,8 @@ Character limits are noted next to each field; every text below fits within them
 **English** (70 characters):
 > The comprehensive Arabic encyclopedia of terms, by the Sharjah Academy
 
-App Store "Promotional text" (up to 170 characters, can be changed anytime without review):
-> أكثر من 26 ألف مصطلح في العلوم اللغوية والشرعية والإنسانية والتطبيقية، بتعريفاتها اللغوية والاصطلاحية ومصادرها الموثوقة.
+App Store "Promotional text" (up to 170 characters, can be changed anytime without review; no figures promised):
+> مصطلحات العلوم اللغوية والشرعية والإنسانية والتطبيقية، بتعريفاتها اللغوية والاصطلاحية ومصادرها الموثوقة، من مجمع اللغة العربية في الشارقة.
 
 ## 5. About / full description (more than 200 words)
 
@@ -44,7 +44,7 @@ App Store "Promotional text" (up to 170 characters, can be changed anytime witho
 >
 > مشروع معرفي شامل من مجمع اللغة العربية في الشارقة، يهدف إلى توثيق تراث اللغة العربية وعلومها ومصطلحاتها، بنسق مخطوطي معاصر يجمع بين الدقة الأكاديمية وجماليات التصميم العربي.
 >
-> يضع التطبيق بين يديك أكثر من ستة وعشرين ألف مصطلح علمي محكَّم، موزعة على عشرات العلوم في العلوم اللغوية والشرعية والإنسانية والتطبيقية والفنون الأدبية؛ من النحو والصرف والبلاغة والعروض، إلى علوم القرآن وعلوم الحديث وأصول الفقه، وصولًا إلى المنطق والصوتيات والمعجميات والمسرح وغيرها.
+> يضع التطبيق بين يديك مصطلحات علمية محكَّمة، موزعة على علوم اللغوية والشرعية والإنسانية والتطبيقية والفنون الأدبية؛ من النحو والصرف والبلاغة والعروض، إلى علوم القرآن وعلوم الحديث وأصول الفقه، وصولًا إلى المنطق والصوتيات والمعجميات والمسرح وغيرها.
 >
 > لكل مصطلح بطاقة علمية متكاملة تعرض التعريف اللغوي، والتعريف الاصطلاحي، وشرح التعريف، والأمثلة، والمصادر والمراجع التي اعتمد عليها الباحثون، في عرض واضح يراعي جمال الخط العربي وسهولة القراءة.
 >
@@ -74,7 +74,7 @@ App Store "Promotional text" (up to 170 characters, can be changed anytime witho
 >
 > A major knowledge project of the Arabic Language Academy in Sharjah, documenting the heritage of the Arabic language, its sciences and terminology, in a contemporary manuscript-inspired design that combines academic rigour with the beauty of Arabic calligraphy.
 >
-> The app gives you more than 26,000 peer-reviewed scholarly terms across dozens of disciplines in the linguistic, Islamic, human and applied sciences and the literary arts: from grammar, morphology, rhetoric and prosody to Quranic sciences, Hadith sciences and legal theory, and on to logic, phonetics, lexicography, theatre and more.
+> The app gives you peer-reviewed scholarly terms across disciplines in the linguistic, Islamic, human and applied sciences and the literary arts: from grammar, morphology, rhetoric and prosody to Quranic sciences, Hadith sciences and legal theory, and on to logic, phonetics, lexicography, theatre and more.
 >
 > Each term has a complete scholarly entry: its linguistic definition, its technical definition, an explanation, examples, and the sources and references the researchers relied on, presented clearly and designed for comfortable reading in Arabic.
 >
@@ -171,7 +171,7 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 
 > This is the official app of the Comprehensive Arabic Encyclopedia (الموسوعة العربية الشاملة), a project of the Arabic Language Academy in Sharjah (UAE), a government cultural institution.
 >
-> The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with a "recently read" list (stored on device only), statistics and the privacy policy. Entries can be shared through the native iOS share sheet.
+> The app provides free access to scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with a "recently read" list (stored on device only), statistics and the privacy policy. Entries can be shared through the native iOS share sheet.
 >
 > Links to other websites open in an in-app Safari view; the app itself stays on the encyclopedia site. The app works in Arabic, right-to-left.
 
