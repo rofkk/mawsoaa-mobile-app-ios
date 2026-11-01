@@ -5,21 +5,22 @@ import SafariServices
 // MARK: - Tabs
 
 enum AppTab: CaseIterable, Hashable {
-    case home, search, stats
+    case home, search, index
 
     var title: String {
         switch self {
         case .home: "الرئيسية"
         case .search: "البحث"
-        case .stats: "الإحصائيات"
+        case .index: "الفهرس"
         }
     }
 
-    var path: String {
+    /// Page the tab opens (the index is a sheet, not a page).
+    var path: String? {
         switch self {
         case .home: "/"
         case .search: "/search"
-        case .stats: "/statistics"
+        case .index: nil
         }
     }
 
@@ -29,7 +30,6 @@ enum AppTab: CaseIterable, Hashable {
         let p = url.path
         if p == "/" || p.isEmpty { return .home }
         if p.hasPrefix("/search") { return .search }
-        if p.hasPrefix("/statistics") { return .stats }
         return nil
     }
 }
@@ -38,6 +38,7 @@ enum AppTab: CaseIterable, Hashable {
 
 struct WebShellView: View {
     @State private var web = WebController()
+    @State private var showIndex = false
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -61,13 +62,27 @@ struct WebShellView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
-            BottomBar(active: AppTab.active(for: web.currentURL)) { web.open($0) }
+            BottomBar(active: showIndex ? .index : AppTab.active(for: web.currentURL)) { tab in
+                if let path = tab.path { web.open(path: path) } else { showIndex = true }
+            }
         }
         .background(Brand.parchment.ignoresSafeArea())
         .sheet(item: $web.externalURL) { url in
             SafariView(url: url).ignoresSafeArea()
         }
+        .sheet(isPresented: $showIndex) {
+            IndexSheet { web.open(path: $0) }
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(22)
+        }
         .animation(.easeInOut(duration: 0.2), value: web.isLoading)
+        #if DEBUG
+        .task {   // testing: `-index YES` opens الفهرس after launch
+            if UserDefaults.standard.bool(forKey: "index") {
+                try? await Task.sleep(for: .seconds(4)); showIndex = true
+            }
+        }
+        #endif
     }
 }
 
@@ -133,16 +148,16 @@ final class WebController: NSObject {
         URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30)
     }
 
-    /// Bottom bar tap: go to the tab's page (through the site's router when possible).
-    func open(_ tab: AppTab) {
+    /// Go to a page of the site (through the site's router when possible, so it's instant).
+    func open(path: String) {
         error = nil
         guard hasLoadedOnce, webView.url.map(Site.isInternal) == true else {
-            webView.load(Self.request(Site.url(path: tab.path)))
+            webView.load(Self.request(Site.url(path: path)))
             return
         }
-        webView.evaluateJavaScript(Site.routerPushJS(tab.path)) { [weak self] result, _ in
+        webView.evaluateJavaScript(Site.routerPushJS(path)) { [weak self] result, _ in
             if (result as? Bool) != true {
-                self?.webView.load(Self.request(Site.url(path: tab.path)))
+                self?.webView.load(Self.request(Site.url(path: path)))
             }
             self?.webView.scrollView.setContentOffset(.zero, animated: false)
         }
@@ -211,6 +226,12 @@ extension WebController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        #if DEBUG
+        // Testing: `-js "<script>"` runs once after the first page load (e.g. open the menu for a screenshot).
+        if !hasLoadedOnce, let js = UserDefaults.standard.string(forKey: "js") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { webView.evaluateJavaScript(js) }
+        }
+        #endif
         hasLoadedOnce = true
         error = nil
         webView.scrollView.refreshControl?.endRefreshing()
@@ -398,6 +419,10 @@ enum Brand {
     static let inkSoft = Color(red: 0x4A / 255, green: 0x34 / 255, blue: 0x26 / 255)
     static let parchment = Color(red: 0xF5 / 255, green: 0xE6 / 255, blue: 0xD3 / 255)
     static let vellum = Color(red: 0xFF / 255, green: 0xFB / 255, blue: 0xF2 / 255)
+    static let goldPale = Color(red: 0xFB / 255, green: 0xE7 / 255, blue: 0xB0 / 255)
+    static let sepia = Color(red: 0x8A / 255, green: 0x3B / 255, blue: 0x12 / 255)
+    static let muted = Color(red: 0x7A / 255, green: 0x5A / 255, blue: 0x3A / 255)
+    static let line = Color(red: 0xA6 / 255, green: 0x78 / 255, blue: 0x30 / 255).opacity(0.32)
 
     static let leaf = LinearGradient(
         stops: [

@@ -27,6 +27,15 @@ enum Site {
     .bottom-bar { display: none !important; }
     .result-newtab { display: none !important; }
     .views { display: none !important; }
+    .site-ease-btn, [data-a11y-toggle], .a11y { display: none !important; }
+    /* the app's own «الفهرس» replaces the site's menu; the header shows the Academy logo (right) and the encyclopedia's */
+    .site-menu-btn, .menu-panel, .menu-scrim { display: none !important; }
+    .site-academy { display: flex !important; align-items: center; flex-shrink: 0; min-height: 44px; }
+    .site-academy-logo { height: 38px !important; width: auto !important; display: block !important; }
+    .site-brand-logo { object-position: left center !important; }
+    /* search page: only the title «البحث في الموسوعة»; the hint under the field centred */
+    .search-page .ui-hero-kicker, .search-page .ui-hero-lead { display: none !important; }
+    .search-hint { text-align: center !important; width: 100% !important; margin-inline: auto !important; align-self: center !important; }
     a[href="/saved"], a[href^="/saved/"], a[href^="/saved?"],
     a[href="/account"], a[href^="/account/"], a[href^="/account?"],
     a[href="/login"], a[href^="/login?"], a[href^="/auth/"] { display: none !important; }
