@@ -177,7 +177,7 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 
 ## 11. Screenshots
 
-`screenshots/01.png` … `05.png`: 1320 × 2868 (6.9-inch iPhone, the size App Store Connect requires).
+`screenshots/6.9-inch/01–05.png`: 1320 × 2868 (required). `screenshots/6.3-inch/01–05.png`: 1206 × 2622 (optional slot). No transparency.
 
 1. Home: logo, search, sections
 2. Discipline page: علوم القرآن with alphabetical filter
