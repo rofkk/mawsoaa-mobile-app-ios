@@ -173,7 +173,7 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 >
 > The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with a "recently read" list (stored on device only), statistics and the privacy policy. Entries can be shared through the native iOS share sheet.
 >
-> External links (the Academy website, other sites) open in an in-app Safari view. The app works in Arabic, right-to-left.
+> Links to other websites open in an in-app Safari view; the app itself stays on the encyclopedia site. The app works in Arabic, right-to-left.
 
 ## 11. Screenshots
 
