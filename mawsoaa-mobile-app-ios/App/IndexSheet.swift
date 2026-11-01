@@ -237,8 +237,8 @@ struct IndexSheet: View {
 
 // MARK: - Data (the site's public API)
 
-struct IndexDomain: Identifiable { let id: Int; let name: String; let arts: [IndexArt] }
-struct IndexArt: Identifiable { let id: Int; let name: String; let cards: Int }
+nonisolated struct IndexDomain: Identifiable { let id: Int; let name: String; let arts: [IndexArt] }
+nonisolated struct IndexArt: Identifiable { let id: Int; let name: String; let cards: Int }
 
 @Observable
 final class IndexModel {
@@ -246,11 +246,11 @@ final class IndexModel {
     var isLoading = false
     var failed = false
 
-    private struct Category: Decodable {
+    nonisolated private struct Category: Decodable {
         let slug: String; let category_type: String; let subcategories: [Sub]
         struct Sub: Decodable { let id: Int; let name_ar: String; let order: Int?; let is_active: Bool?; let visibility_status: String? }
     }
-    private struct Mappings: Decodable {
+    nonisolated private struct Mappings: Decodable {
         let results: [M]
         struct M: Decodable {
             let art: A; let public_subcategory: S?; let display_name: String?; let display_order: Int?; let visible_cards_count: Int?

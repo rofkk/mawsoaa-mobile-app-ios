@@ -1,7 +1,7 @@
 import Foundation
 
 /// The website the app shows, and the parts of it the app keeps or hides.
-enum Site {
+nonisolated enum Site {
     static let home = URL(string: "https://4nov.sharjah-encyclopedia.org/")!
     static let hosts: Set<String> = ["4nov.sharjah-encyclopedia.org", "sharjah-encyclopedia.org", "www.sharjah-encyclopedia.org"]
 
