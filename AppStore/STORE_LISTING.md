@@ -137,10 +137,9 @@ https://4nov.sharjah-encyclopedia.org/app-privacy.html
 ## 9. Support URL (contact us)
 
 ```
-https://www.alashj.ae/
+https://sharjah-encyclopedia.org/app-support.html
 ```
-The Academy homepage lists info@alashj.ae. Apple requires the support URL to lead to working contact information.
-Better: if the Academy has (or adds) a dedicated contact page, use it instead. `alashj.ae/contact-us` and `/contact` currently return 404.
+Upload `privacy-policy/app-support.html` to the website's `public/` folder (same as the privacy page). It has the contact email, phone and address, and short answers to common questions, in Arabic and English. It stays inside the encyclopedia's own site, so it doesn't send users to a different website.
 
 Marketing URL (optional): `https://4nov.sharjah-encyclopedia.org/`
 
