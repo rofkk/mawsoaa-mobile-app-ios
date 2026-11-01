@@ -162,7 +162,7 @@ The app's own code collects nothing. The website it displays uses **Google Analy
 
 > This is the official app of the Comprehensive Arabic Encyclopedia (الموسوعة العربية الشاملة), a project of the Arabic Language Academy in Sharjah (UAE), a government cultural institution.
 >
-> The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Statistics.
+> The app provides free access to more than 26,000 scholarly Arabic terms with their definitions and sources. No account or login is needed: all content is public. Main sections are in the native bottom bar: Home (browse by section › field › discipline), Search (full-text, diacritics-insensitive, with filters) and Index (الفهرس), a native index of every section, field and discipline, with statistics.
 >
 > External links (the Academy website, other sites) open in an in-app Safari view. The app works in Arabic, right-to-left.
 
